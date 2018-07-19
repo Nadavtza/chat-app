@@ -25,16 +25,21 @@ io.on('connection' , (socket)=>{
     //send
     console.log('New user connected');
 
-    socket.emit('newMessage' ,{
+    socket.emit('newMessage' ,{ // socket.emit - to single connection
         from: 'Nadav',
         text: 'hey how are you',
         createdAt: new Date().getTime()
     });
-
+    
 
     //listen to
-    socket.on('createMessage' , (createMessage)=>{
-        console.log('createMessage' , createMessage);
+    socket.on('createMessage' , (message)=>{
+        console.log('createMessage' , message);
+        io.emit('newMessage' ,{ // io.emit - to all connection
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
     });
 
     socket.on('disconnect' , (socket)=>{
