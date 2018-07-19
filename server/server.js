@@ -7,7 +7,7 @@ const express = require('express');
 const socetIO = require('socket.io');
 
 //local exports
-const {generateMessage} = require('./utils/message');
+const {generateMessage ,generateLocationMessage} = require('./utils/message');
 
 //consts
 const publicPath = path.join(__dirname , '../public' );
@@ -37,8 +37,13 @@ io.on('connection' , (socket)=>{
         });
     });
 
+    socket.on('createLocationMessage' , (coords)=>{
+        io.emit('newLocationMessage' ,generateLocationMessage('Admin' ,coords.latitude , coords.longitude));  
+    });
+
     socket.on('disconnect' , (socket)=>{
         console.log('User was disconnected');
+        io.emit('newMessage' ,generateMessage('Admin' ,`User left chat app`));
     }); 
 }); 
 
