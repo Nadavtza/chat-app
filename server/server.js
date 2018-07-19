@@ -22,7 +22,20 @@ var io = socetIO(server);
 app.use(express.static(publicPath));
 
 io.on('connection' , (socket)=>{
+    //send
     console.log('New user connected');
+
+    socket.emit('newMessage' ,{
+        from: 'Nadav',
+        text: 'hey how are you',
+        createdAt: new Date().getTime()
+    });
+
+
+    //listen to
+    socket.on('createMessage' , (createMessage)=>{
+        console.log('createMessage' , createMessage);
+    });
 
     socket.on('disconnect' , (socket)=>{
         console.log('User was disconnected');
