@@ -1,4 +1,5 @@
 var expect = require('expect');
+
 var {generateMessage ,generateLocationMessage} = require('./message');
 
 describe('generateMessage' , ()=>{
