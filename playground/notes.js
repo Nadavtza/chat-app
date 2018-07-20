@@ -24,3 +24,11 @@
 //     li.append(a);
 //     jQuery('#messages').append(li);
 // });
+
+// socket.on('newMessage' , function (newMessage) {
+   
+//   var formattedTime = moment(newMessage.createdAt).format('H:mm a');    
+//   var li =jQuery('<li></li>');
+//   li.text(`${newMessage.from} ${formattedTime}: ${newMessage.text}`);
+//   jQuery('#messages').append(li);
+// });
