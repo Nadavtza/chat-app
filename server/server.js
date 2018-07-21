@@ -7,7 +7,7 @@ const express = require('express');
 const socetIO = require('socket.io');
 
 //local exports
-const {generateMessage ,generateLocationMessage} = require('./utils/message');
+const {generateMessage ,generateLocationMessage ,generatePictureMessage} = require('./utils/message');
 const {isValidString} = require('./utils/validation');
 const {Users} = require('./utils/users');
 const {Rooms} = require('./utils/rooms');
@@ -74,6 +74,13 @@ io.on('connection' , (socket)=>{
         var user = users.getUser(socket.id);
         if(user){
             io.to(user.room).emit('newLocationMessage' ,generateLocationMessage(user.name ,coords.latitude , coords.longitude)); 
+        } 
+    });
+
+    socket.on('createPictureMessage' , (image)=>{
+        var user = users.getUser(socket.id);
+        if(user){
+            io.to(user.room).emit('newPictureMessage' ,generatePictureMessage(user.name ,image)); 
         } 
     });
 

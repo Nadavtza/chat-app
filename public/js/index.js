@@ -15,9 +15,10 @@ socket.on('updateRoomList' , function(rooms){
     var select = jQuery('<select class="form-field" ></select>');
     label.append(select);
     rooms.forEach(function (room){
-        select.append(jQuery('<option></option>').text(room.room_name));
+        select.append(jQuery('<option name="room_option"></option>').text(room.room_name));
     });
 
    jQuery('#roomList').html(label);
    console.log(rooms);
 });
+

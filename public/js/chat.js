@@ -78,6 +78,23 @@ socket.on('newLocationMessage' , function (message) {
     scrollToBottom();
 });
 
+
+socket.on('newPictureMessage' , function (message) {
+
+    var formattedTime = moment(message.createdAt).format('H:mm a');
+    var template = jQuery('#picture_message_template').html();
+
+    var html = Mustache.render(template , {
+        from: message.from ,
+        image: message.image,
+        createdAt: formattedTime
+    });
+    jQuery('#messages').append(html);
+    scrollToBottom();
+});
+
+
+
 jQuery('#messageForm').on('submit' , function (e) {
     e.preventDefault();//prevent page refresh
 
@@ -113,3 +130,54 @@ locationButton.on('click' , function () {
         alert('Unable to fetch location');
     } );   
 });
+
+$('#imagefile').bind('change', function(e){
+    var data = e.originalEvent.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      console.log(evt.target.result);
+
+      socket.emit('createPictureMessage' , evt.target.result);
+      //socket.emit('user image', evt.target.result);
+    };
+    reader.readAsDataURL(data);
+    
+  });
+
+
+
+// jQuery('#pictureForm').on('submit' , function (e) {
+//     e.preventDefault();//prevent page refresh
+
+//     // var url =  jQuery('[name = pic_url ]') ;
+//     var imageType = /image.*/;
+//     var file = e.originalEvent.target.files;
+//     console.log(e);
+//     // if (!file.type.match(imageType)) {
+//     //     return alert('Not a picture');
+//     // }
+  
+       
+//         // var reader = new FileReader();
+//         // reader.onload = function(evt){
+//         //   image('me', evt.target.result);
+//         //   socket.emit('user image', evt.target.result);
+//         // };
+//         // reader.readAsDataURL(data);
+        
+
+
+    
+
+  
+   
+    
+     
+   
+       
+    
+//     // socket.emit('createPictureMessage' , {
+//     //         url: 'ffff' 
+//     //     });
+
+// });

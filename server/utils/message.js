@@ -16,4 +16,12 @@ var generateLocationMessage = (from , latitude , longitude)=>{
     };
 };
 
-module.exports = {generateMessage ,generateLocationMessage};
+var generatePictureMessage = (from, image)=>{
+    return{
+            from,
+            image,
+            createdAt: moment().valueOf()
+    };
+};
+
+module.exports = {generateMessage ,generateLocationMessage ,generatePictureMessage};
