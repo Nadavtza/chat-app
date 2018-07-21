@@ -43,6 +43,15 @@ socket.on('updateUserList' , function(users){
     jQuery('#users').html(ol);
 });
 
+socket.on('updateRoomList' , function(rooms){
+    var ol = jQuery('<ul></ul>');
+    rooms.forEach(function (room){
+        ol.append(jQuery('<li></li>').text(`${room.room_name} | ${room.users} Person(s)`));
+    });
+
+   jQuery('#rooms').html(ol);
+});
+
 socket.on('newMessage' , function (newMessage) {
     var formattedTime = moment(newMessage.createdAt).format('H:mm a');    
     var template = jQuery('#message_template').html();

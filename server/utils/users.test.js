@@ -62,4 +62,10 @@ describe('Users' , ()=>{
         expect(users.users.length).toBe(3);
         expect(findUser).toEqual(undefined);
     });
+
+    it('Should find user by name', ()=>{  
+        var findUser  = users.getUserByName('ani');
+        expect(users.users.length).toBe(3);
+        expect(findUser.name).toEqual('ani');
+    });
 });

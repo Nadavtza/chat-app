@@ -94,6 +94,11 @@
     background: -ms-linear-gradient(125deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* ie10+ */
     background: linear-gradient(325deg, rgba(39,107,130,1) 0%, rgba(49,84,129,1) 100%); /* w3c */
   }
+
+  .sidebar1{
+    vertical-align:top;
+    height:50%;
+  }
   
   .chat__sidebar h3 {
     color: #e6eaee;
