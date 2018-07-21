@@ -8,6 +8,7 @@ const socetIO = require('socket.io');
 
 //local exports
 const {generateMessage ,generateLocationMessage} = require('./utils/message');
+const {isValidString} = require('./utils/validation');
 
 //consts
 const publicPath = path.join(__dirname , '../public' );
@@ -22,12 +23,18 @@ app.use(express.static(publicPath));
 
 io.on('connection' , (socket)=>{
     //send
-    console.log('New user connected'); //for server
+    socket.on('join' ,(params , callback)=>{
+        if(!isValidString(params.name) || !isValidString(params.room) )
+            callback('Name and room name are required');
 
-    socket.emit('newMessage' ,generateMessage('Admin' ,'Welcome to the chat app' )); //user connection
+        socket.join(params.room);
 
-    socket.broadcast.emit('newMessage' ,generateMessage('Admin' ,`New user joined to chat app` ));  //to other users
-
+        console.log('New user connected'); //for server
+        socket.emit('newMessage' ,generateMessage('Admin' ,`Welcome to the chat app, you are now in room ${params.room}` )); //user connection
+        socket.broadcast.to(params.room).emit('newMessage' ,generateMessage('Admin' ,`User ${params.name} has joined` ));  //to other users
+    
+        callback();
+    })
     //listen to
     socket.on('createMessage' , (message ,callback)=>{
         console.log('createMessage' , message);
