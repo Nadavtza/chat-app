@@ -74,13 +74,7 @@ jQuery('#messageForm').on('submit' , function (e) {
 
     var message =  jQuery('[name = message ]') ;
 
-    if(message.val() == ''){
-        alert('Please write a message');
-        return ;
-    }
-
     socket.emit('createMessage' , {
-        from: 'User',
         text: message.val()
     } , function () {
         message.val('');
