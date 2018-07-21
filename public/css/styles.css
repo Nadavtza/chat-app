@@ -17,7 +17,7 @@
     font-size: 1.5rem;
   }
   
-  button {
+  button  {
     border: none;
     background: #265f82;
     color: white;
@@ -38,6 +38,28 @@
     background: #698ea5;
   }
   
+  
+  .custom-file-upload  {
+    border: none;
+    background: #265f82;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: background .3s ease;
+  }
+  
+  .custom-file-upload:hover {
+    border: none;
+    background: #1F4C69;
+    color: white;
+    padding: 10px;
+  }
+  
+  .custom-file-upload:disabled {
+    cursor: default;
+    background: #698ea5;
+  }
+
   .centered-form {
     display: flex;
     align-items: center;
@@ -143,17 +165,20 @@
     flex-grow: 1;
     display: flex;
   }
-  
+  input[type="file"] {
+    display: none;
+  }
+
   .chat__footer form * {
     margin-right: 10px;
   }
   
-  .chat__footer input {
+  .chat__footer input  {
     border: none;
     padding: 10px;
     flex-grow: 1;
   }
-  
+
   .chat__messages {
     list-style-type: none;
     padding: 10px;
